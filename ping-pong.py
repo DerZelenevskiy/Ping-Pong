@@ -21,7 +21,17 @@ class Ball(GameSprite):
     pass
 
 class Racket(GameSprite):
-    pass
+    def move(self, keys, controller):
+        if controller == 'w,s':
+            if keys[pygame.K_w] and self.rect.y > 0:
+                self.rect.y -= 5
+            if keys[pygame.K_s] and self.rect.y < 400:
+                self.rect.y += 5
+        if controller == 'up,down':
+            if keys[pygame.K_UP] and self.rect.y > 0:
+                self.rect.y -= 5
+            if keys[pygame.K_DOWN] and self.rect.y < 400:
+                self.rect.y += 5
 
 racket1 = Racket('platform.png', 46, 200, 0, 200)
 racket2 = Racket('platform.png', 46, 200, 754, 200)
@@ -32,7 +42,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
+    keys = pygame.key.get_pressed()
     screen.fill((150, 150, 255))
+
+    racket1.move(keys, 'w,s')
+    racket2.move(keys, 'up,down')
 
     racket1.blit(screen)
     racket2.blit(screen)
