@@ -17,10 +17,25 @@ class GameSprite(pygame.sprite.Sprite):
     def blit(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
+class Ball(GameSprite):
+    pass
+
+class Racket(GameSprite):
+    pass
+
+racket1 = Racket('platform.png', 46, 200, 0, 200)
+racket2 = Racket('platform.png', 46, 200, 754, 200)
+ball = Ball('ball.png', 50, 50, 375, 275)
+
 while True:
     clock.tick(fps)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
     screen.fill((150, 150, 255))
+
+    racket1.blit(screen)
+    racket2.blit(screen)
+    ball.blit(screen)
+
     pygame.display.update()
